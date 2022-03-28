@@ -36,7 +36,7 @@ const generadorProductos = (productos) => {
         productosGenerados += `
         <div class="col mb-5">
             <div class="card h-100">
-                ${(elemento.stock == 0) ? `<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sin Stock</div>` : ``}
+                ${(elemento.stock == 0) ? `<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sin Stock</div>` : ``} 
                 <img class="card-img-top" src=${elemento.img} alt="..." />
                 <div class="card-body p-4">
                     <div class="text-center">
