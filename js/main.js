@@ -1,4 +1,4 @@
-const carrito = [];
+let carrito = [];
 
 class orderUser {
     constructor(id, nombre, precio, img, cantidad) {
@@ -53,7 +53,7 @@ const generadorProductos = (productos) => {
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                        <a class="btn btn-outline-dark mt-auto" href="#" onclick="agregarAlCarrito(${elemento.id})">Comprar</a>
+                        <button type="button" class="btn btn-outline-dark" onclick="agregarAlCarrito(${elemento.id})">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -123,17 +123,18 @@ const generadorTablaCarrito = (carrito) => {
 
 const totalCarrito = () => {
     const totalCompra = carrito.reduce((acumulador, elemento) => acumulador + elemento.total, 0);
-    document.getElementById("totalCompra").innerHTML = `
-    <h5 class="p-3">Total a pagar</h5>
-    <h5 class="p-3">$ ${totalCompra}</h5>`;
+    document.getElementById("totalCompra").innerHTML = `${totalCompra}`;
 }
 
 
 //Agregar al carrito
 
 const agregarAlCarrito = (id) => {
+
+    //Buscando el producto a agregar
     const productoComprado = productos.find((elemento) => elemento.id == id);
 
+    //Agregando el producto
     const rePedido = carrito.some((e) => e.id == productoComprado.id);
     if (rePedido == false) {
         carrito.push(new orderUser(productoComprado.id, productoComprado.nombre, productoComprado.precio, productoComprado.img, 1));
@@ -144,9 +145,16 @@ const agregarAlCarrito = (id) => {
         carrito[indiceElemento].total = carrito[indiceElemento].cantidad * carrito[indiceElemento].precio
     }
 
+    //Actualizando el Storage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    //Actualizando el HTML del Spam de Cantidad de productos agregados
     document.getElementById("spamCarrito").innerHTML = carrito.length;
 
+    //Generando HTML del body-carrito
     generadorTablaCarrito(carrito);
+
+    //Actualizando el total del carrito
     totalCarrito();
 }
 
@@ -158,6 +166,8 @@ const eliminarProducto = (elemento) => {
     document.getElementById("spamCarrito").innerHTML = carrito.length;
     generadorTablaCarrito(carrito);
     totalCarrito();
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 //+1 Cantidad
@@ -170,6 +180,10 @@ const sumarProducto = (id) => {
     generadorTablaCarrito(carrito);
 
     totalCarrito();
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+
 }
 
 // -1 Producto
@@ -187,10 +201,31 @@ const restarProducto = (id) => {
 
         totalCarrito();
     }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+//Vaciar carrito (vaciar y confirmar compra)
+
+const vaciarCarrito = () => {
+    carrito = [];
+    generadorTablaCarrito(carrito);
+    totalCarrito();
+    document.getElementById("spamCarrito").innerHTML = carrito.length;
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 
 
+//Inicializando con Storage
+
+if (localStorage.getItem("carrito") != null) {
+    const storageCarrito = JSON.parse(localStorage.getItem("carrito"));
+    carrito = storageCarrito;
+    generadorTablaCarrito(carrito);
+    totalCarrito();
+    document.getElementById("spamCarrito").innerHTML = carrito.length;
+}
 
 // Ejecutando funciones
 generadorProductos(productos);
