@@ -90,8 +90,13 @@ botonBuscador.addEventListener("click", valorProductoBusc);
 //DOM carrito
 
 const mostrarTablaCarrito = (table) => {
-    document.getElementById("productosDelCarrito").innerHTML = table;
+    if (carrito.length == 0) {
+        document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`;
+    } else {
+        document.getElementById("productosDelCarrito").innerHTML = table;
+    }    
 }
+
 
 //Generador de carrito
 
@@ -153,8 +158,6 @@ const agregarAlCarrito = (id) => {
 
     //Generando HTML del body-carrito
     generadorTablaCarrito(carrito);
-
-    //Actualizando el total del carrito
     totalCarrito();
 }
 
@@ -198,23 +201,53 @@ const restarProducto = (id) => {
     else {
         carrito[indiceElemento].total = carrito[indiceElemento].cantidad * carrito[indiceElemento].precio
         generadorTablaCarrito(carrito);
-
         totalCarrito();
     }
+
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-//Vaciar carrito (vaciar y confirmar compra)
+//Confirmar compra
+
+const confirmarCompra = () => {
+
+    if (carrito.length > 0) {
+
+        swal({
+            title: "Compra confirmada",
+            text: "Muchas gracias!",
+            icon: "success",
+          });
+    }
+
+    carrito = [];
+    generadorTablaCarrito(carrito);
+    totalCarrito();
+    document.getElementById("spamCarrito").innerHTML = carrito.length;
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+}
+
+//Vaciar carrito
 
 const vaciarCarrito = () => {
+
+    if (carrito.length > 0) {
+
+        swal({
+            title: "Ya no tiene productos en su carrito",
+            text: "Eliga otros productos",
+            icon: "warning",
+          });
+    }
+
     carrito = [];
     generadorTablaCarrito(carrito);
     totalCarrito();
     document.getElementById("spamCarrito").innerHTML = carrito.length;
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
-
 
 
 //Inicializando con Storage
@@ -229,4 +262,5 @@ if (localStorage.getItem("carrito") != null) {
 
 // Ejecutando funciones
 generadorProductos(productos);
+if (carrito.length == 0) {document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`;}
 
