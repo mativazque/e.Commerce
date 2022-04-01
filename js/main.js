@@ -94,7 +94,7 @@ const mostrarTablaCarrito = (table) => {
         document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`;
     } else {
         document.getElementById("productosDelCarrito").innerHTML = table;
-    }    
+    }
 }
 
 
@@ -132,6 +132,13 @@ const totalCarrito = () => {
 }
 
 
+//Spam cantidad de productos carrito
+
+const spamCarrito = () => {
+    const totalCantidadSpam = carrito.reduce((acc, el) => acc + el.cantidad, 0);
+    document.getElementById("spamCarrito").innerHTML = totalCantidadSpam;
+}
+
 //Agregar al carrito
 
 const agregarAlCarrito = (id) => {
@@ -150,15 +157,30 @@ const agregarAlCarrito = (id) => {
         carrito[indiceElemento].total = carrito[indiceElemento].cantidad * carrito[indiceElemento].precio
     }
 
+    //Alert
+    Toastify({
+        text: `Agregaste ${productoComprado.nombre}  al carrito`,
+        duration: 3000,
+        newWindow: true,
+        gravity: "top", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function () { } // Callback after click
+    }).showToast();
+
     //Actualizando el Storage
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
     //Actualizando el HTML del Spam de Cantidad de productos agregados
-    document.getElementById("spamCarrito").innerHTML = carrito.length;
+    spamCarrito();
 
     //Generando HTML del body-carrito
     generadorTablaCarrito(carrito);
     totalCarrito();
+
 }
 
 //Eliminar producto
@@ -166,7 +188,7 @@ const eliminarProducto = (elemento) => {
     const idCarrito = carrito.map((elem) => elem.id);
     const indiceElemento = idCarrito.indexOf(elemento);
     carrito.splice(indiceElemento, 1);
-    document.getElementById("spamCarrito").innerHTML = carrito.length;
+    spamCarrito();
     generadorTablaCarrito(carrito);
     totalCarrito();
 
@@ -183,6 +205,7 @@ const sumarProducto = (id) => {
     generadorTablaCarrito(carrito);
 
     totalCarrito();
+    spamCarrito();
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
@@ -202,6 +225,7 @@ const restarProducto = (id) => {
         carrito[indiceElemento].total = carrito[indiceElemento].cantidad * carrito[indiceElemento].precio
         generadorTablaCarrito(carrito);
         totalCarrito();
+        spamCarrito();
     }
 
 
@@ -218,13 +242,13 @@ const confirmarCompra = () => {
             title: "Compra confirmada",
             text: "Muchas gracias!",
             icon: "success",
-          });
+        });
     }
 
     carrito = [];
     generadorTablaCarrito(carrito);
     totalCarrito();
-    document.getElementById("spamCarrito").innerHTML = carrito.length;
+    spamCarrito();
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
 }
@@ -239,13 +263,13 @@ const vaciarCarrito = () => {
             title: "Ya no tiene productos en su carrito",
             text: "Eliga otros productos",
             icon: "warning",
-          });
+        });
     }
 
     carrito = [];
     generadorTablaCarrito(carrito);
     totalCarrito();
-    document.getElementById("spamCarrito").innerHTML = carrito.length;
+    spamCarrito();
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
@@ -262,5 +286,5 @@ if (localStorage.getItem("carrito") != null) {
 
 // Ejecutando funciones
 generadorProductos(productos);
-if (carrito.length == 0) {document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`;}
+if (carrito.length == 0) { document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`; }
 
