@@ -208,8 +208,6 @@ const sumarProducto = (id) => {
     spamCarrito();
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
-
-
 }
 
 // -1 Producto
