@@ -23,6 +23,9 @@
     <script src="js/main.js" defer></script>
 </head>
 
+
+
+
 <body>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,10 +55,16 @@
                     <button class="btn btn-secondary" type="submit" id="botonDebuscador">Search</button>
                 </ul>
                 <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas"
+
+                    <button class="btn btn-outline-dark p-2 me-3" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRightFav" aria-controls="offcanvasRight">
+                        <i class="fa-solid fa-heart fa-lg"></i>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill" id="spamFavoritos">0</span>
+                    </button>
+
+                    <button class="btn btn-outline-dark p-2" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
+                        <i class="fas fa-shopping-cart fa-lg"></i>
                         <span class="badge bg-dark text-white ms-1 rounded-pill" id="spamCarrito">0</span>
                     </button>
                 </form>
@@ -84,6 +93,27 @@
             </div>
         </div>
     </div>
+    <!-- Favorito-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightFav" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Productos favoritos</h5>
+            <hr class="mt-1">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body" id="productosFavoritos">
+        </div>
+        <div class="offcanvas-footer">
+            <div class="d-flex justify-content-between p-2">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvasRightFav"
+                    onclick="vaciarFavoritos()">Eliminar todos</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="offcanvasRightFav"
+                    onclick="favoritosAlCarrito()">Enviar a 
+                    <i class="fas fa-shopping-cart fa-lg"></i>   
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header-->
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">

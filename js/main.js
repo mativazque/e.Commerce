@@ -1,4 +1,6 @@
+
 let carrito = [];
+let favoritos = [];
 
 class orderUser {
     constructor(id, nombre, precio, img, cantidad) {
@@ -29,7 +31,6 @@ const productos = [
 
 
 //Generador de productos en INDEX
-
 const generadorProductos = (productos) => {
     let productosGenerados = "";
     productos.forEach((elemento) => {
@@ -53,7 +54,8 @@ const generadorProductos = (productos) => {
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                        <button type="button" class="btn btn-outline-dark" onclick="agregarAlCarrito(${elemento.id})">Comprar</button>
+                        <button type="button" class="btn btn-outline-dark" onclick="agregarAlCarrito(${elemento.id})"><i class="fas fa-shopping-cart fa-lg"></i></button>
+                        <button type="button" class="btn btn-outline-dark" onclick="agregarFavoritos(${elemento.id})"><i class="fa-solid fa-heart fa-lg"></i></button>
                     </div>
                 </div>
             </div>
@@ -65,13 +67,11 @@ const generadorProductos = (productos) => {
 
 
 //DOM productos index
-
 const mostrarCardenHTML = (card) => {
     document.getElementById("contenedorProductos").innerHTML = card;
 }
 
 //Buscador de productos
-
 const valorProductoBusc = () => {
     const valorProductoBuscado = document.getElementById("buscador").value.toUpperCase().trim();
 
@@ -88,7 +88,6 @@ botonBuscador.addEventListener("click", valorProductoBusc);
 /////Carrito
 
 //DOM carrito
-
 const mostrarTablaCarrito = (table) => {
     if (carrito.length == 0) {
         document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`;
@@ -99,7 +98,6 @@ const mostrarTablaCarrito = (table) => {
 
 
 //Generador de carrito
-
 const generadorTablaCarrito = (carrito) => {
     let productosGeneradosCarrito = "";
     carrito.forEach((elemento) => {
@@ -125,7 +123,6 @@ const generadorTablaCarrito = (carrito) => {
 }
 
 //Total carrito
-
 const totalCarrito = () => {
     const totalCompra = carrito.reduce((acumulador, elemento) => acumulador + elemento.total, 0);
     document.getElementById("totalCompra").innerHTML = `${totalCompra}`;
@@ -133,14 +130,12 @@ const totalCarrito = () => {
 
 
 //Spam cantidad de productos carrito
-
 const spamCarrito = () => {
     const totalCantidadSpam = carrito.reduce((acc, el) => acc + el.cantidad, 0);
     document.getElementById("spamCarrito").innerHTML = totalCantidadSpam;
 }
 
 //Agregar al carrito
-
 const agregarAlCarrito = (id) => {
 
     //Buscando el producto a agregar
@@ -171,15 +166,16 @@ const agregarAlCarrito = (id) => {
         onClick: function () { } // Callback after click
     }).showToast();
 
-    //Actualizando el Storage
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
+    
     //Actualizando el HTML del Spam de Cantidad de productos agregados
     spamCarrito();
 
     //Generando HTML del body-carrito
     generadorTablaCarrito(carrito);
     totalCarrito();
+
+    //Actualizando el Storage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 
 }
 
@@ -196,7 +192,6 @@ const eliminarProducto = (elemento) => {
 }
 
 //+1 Cantidad
-
 const sumarProducto = (id) => {
     const idCarrito = carrito.map((elem) => elem.id);
     const indiceElemento = idCarrito.indexOf(id);
@@ -211,7 +206,6 @@ const sumarProducto = (id) => {
 }
 
 // -1 Producto
-
 const restarProducto = (id) => {
     const idCarrito = carrito.map((elem) => elem.id);
     const indiceElemento = idCarrito.indexOf(id);
@@ -231,7 +225,6 @@ const restarProducto = (id) => {
 }
 
 //Confirmar compra
-
 const confirmarCompra = () => {
 
     if (carrito.length > 0) {
@@ -252,18 +245,7 @@ const confirmarCompra = () => {
 }
 
 //Vaciar carrito
-
 const vaciarCarrito = () => {
-
-    if (carrito.length > 0) {
-
-        swal({
-            title: "Ya no tiene productos en su carrito",
-            text: "Eliga otros productos",
-            icon: "warning",
-        });
-    }
-
     carrito = [];
     generadorTablaCarrito(carrito);
     totalCarrito();
@@ -271,18 +253,151 @@ const vaciarCarrito = () => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+/////FAVORITOS
+
+//DOM favorito
+const mostrarTablaFav = (table) => {
+    if (favoritos.length == 0) {
+        document.getElementById("productosFavoritos").innerHTML = `<h6>No hay productos agregados.</h6>`;
+    } else {
+        document.getElementById("productosFavoritos").innerHTML = table;
+    }
+}
+
+//Generador de favoritos
+const generadorTablaFav = (favoritos) => {
+    let productosGeneradosFav = "";
+    favoritos.forEach((elemento) => {
+        productosGeneradosFav += `
+        <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <img src="${elemento.img}" alt="" class="imgCarrito">
+                    <div class="d-flex flex-column">
+                        <h6>${elemento.nombre}</h6>
+                        <h6>$ ${elemento.total}</h6>
+                    </div>
+                </div>
+                <div>
+                    <i class="fas fa-shopping-cart fa-lg me-5" onclick="favCar(${elemento.id})"></i>
+                    <i class="fa-solid fa-trash-can fa-lg" onclick="eliminarProductoFav(${elemento.id})"></i>
+                </div>
+        </div>`;
+    });
+
+    mostrarTablaFav(productosGeneradosFav);
+}
+
+//Spam cantidad de productos favoritos
+const spamFav = () => {
+    const totalCantidadFavSpam = favoritos.reduce((acc, el) => acc + el.cantidad, 0);
+    document.getElementById("spamFavoritos").innerHTML = totalCantidadFavSpam;
+}
+
+//Agregar a favoritos
+const agregarFavoritos = (id) => {
+
+    //Buscando el producto a agregar
+    const productoFavorito = productos.find((elemento) => elemento.id == id);
+
+    //Agregando el producto
+    const reFav = favoritos.some((e) => e.id == productoFavorito.id);
+    if (reFav == false) {
+        favoritos.push(new orderUser(productoFavorito.id, productoFavorito.nombre, productoFavorito.precio, productoFavorito.img, 1));
+        //Alert
+        Toastify({
+            text: `Agregaste ${productoFavorito.nombre}  a favoritos`,
+            duration: 3000,
+            newWindow: true,
+            gravity: "top", // `top` or `bottom`
+            position: "left", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function () { } // Callback after click
+        }).showToast();
+    } else {
+            Toastify({
+                text: `Ya tienes ${productoFavorito.nombre} en favoritos`,
+                duration: 3000,
+                newWindow: true,
+                gravity: "top", // `top` or `bottom`
+                position: "left", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #00b0b, #96c93d)",
+                },
+                onClick: function () { } // Callback after click
+            }).showToast();
+
+    }
+
+    //Actualizando el HTML del Spam de Cantidad de productos agregados
+    spamFav();
+
+    //Generando HTML del body-carrito
+    generadorTablaFav(favoritos);
+
+    //Actualizando el Storage
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+}
+
+//Eliminar producto
+const eliminarProductoFav = (elemento) => {
+    const idFav = favoritos.map((elem) => elem.id);
+    const indiceElemento = idFav.indexOf(elemento);
+    favoritos.splice(indiceElemento, 1);
+    spamFav();
+    generadorTablaFav(favoritos);
+
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+}
+
+
+//De favorito a carrito
+const favCar = (id) => {
+    agregarAlCarrito(id);
+    eliminarProductoFav(id);
+
+}
+
+//Vaciar carrito
+const vaciarFavoritos = () => {
+    favoritos = [];
+    generadorTablaFav(favoritos);
+    spamFav();
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+}
+
+
+//Enviar a favoritos
+const favoritosAlCarrito = () => {
+    for (i = 0; i < favoritos.length; i++) {
+        agregarAlCarrito(favoritos[i].id);
+    }
+    vaciarFavoritos();
+
+}
 
 //Inicializando con Storage
-
 if (localStorage.getItem("carrito") != null) {
     const storageCarrito = JSON.parse(localStorage.getItem("carrito"));
     carrito = storageCarrito;
     generadorTablaCarrito(carrito);
     totalCarrito();
-    document.getElementById("spamCarrito").innerHTML = carrito.length;
+    spamCarrito();
 }
+
+if (localStorage.getItem("favoritos") != null) {
+    const storageFavoritos = JSON.parse(localStorage.getItem("favoritos"));
+    favoritos = storageFavoritos;
+    generadorTablaFav(favoritos);
+    spamFav();
+}
+
 
 // Ejecutando funciones
 generadorProductos(productos);
+
 if (carrito.length == 0) { document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`; }
 
