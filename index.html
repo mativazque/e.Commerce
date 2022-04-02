@@ -86,7 +86,7 @@
                 <h5 id="totalCompra"></h5>
             </div>
             <div class="d-flex justify-content-between p-2">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvas"
+                <button type="button" class="btn btn-danger"
                     onclick="vaciarCarrito()">Vaciar carrito</button>
                 <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas"
                     onclick="confirmarCompra()">Pagar</button>
@@ -104,9 +104,9 @@
         </div>
         <div class="offcanvas-footer">
             <div class="d-flex justify-content-between p-2">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="offcanvasRightFav"
+                <button type="button" class="btn btn-danger"
                     onclick="vaciarFavoritos()">Eliminar todos</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="offcanvasRightFav"
+                <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas"
                     onclick="favoritosAlCarrito()">Enviar a 
                     <i class="fas fa-shopping-cart fa-lg"></i>   
                 </button>
@@ -126,9 +126,9 @@
     <!-- Main-->
     <main>
         <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
+            <div class="container-fluid px-4 px-lg-5">
                 <div id="contenedorProductos"
-                    class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 </div>
             </div>
         </section>

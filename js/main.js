@@ -42,20 +42,13 @@ const generadorProductos = (productos) => {
                 <div class="card-body p-4">
                     <div class="text-center">
                         <h5 class="fw-bolder">${elemento.nombre}</h5>
-                        <div class="d-flex justify-content-center small text-warning mb-2">
-                            <div class="bi-star-fill"></div>
-                            <div class="bi-star-fill"></div>
-                            <div class="bi-star-fill"></div>
-                            <div class="bi-star-fill"></div>
-                            <div class="bi-star-fill"></div>
-                        </div>$ 
                         ${elemento.precio}
                     </div>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                        <button type="button" class="btn btn-outline-dark" onclick="agregarAlCarrito(${elemento.id})"><i class="fas fa-shopping-cart fa-lg"></i></button>
-                        <button type="button" class="btn btn-outline-dark" onclick="agregarFavoritos(${elemento.id})"><i class="fa-solid fa-heart fa-lg"></i></button>
+                        <button type="button" class="btn btn-outline-dark m-2" onclick="agregarAlCarrito(${elemento.id})"><i class="fas fa-shopping-cart fa-lg"></i></button>
+                        <button type="button" class="btn btn-outline-dark m-2" onclick="agregarFavoritos(${elemento.id})"><i class="fa-solid fa-heart fa-lg"></i></button>
                     </div>
                 </div>
             </div>
