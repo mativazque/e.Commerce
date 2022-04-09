@@ -17,16 +17,31 @@ class orderUser {
 
 
 const productos = [
-    { id: 1, nombre: "Producto A", precio: 300, stock: 0, img: "assets/producto.jpg" },
-    { id: 2, nombre: "Producto B", precio: 200, stock: 40, img: "assets/producto.jpg" },
-    { id: 3, nombre: "Producto C", precio: 330, stock: 40, img: "assets/producto.jpg" },
-    { id: 4, nombre: "Producto D", precio: 300, stock: 40, img: "assets/producto.jpg" },
-    { id: 5, nombre: "Producto E", precio: 200, stock: 40, img: "assets/producto.jpg" },
-    { id: 6, nombre: "Producto F", precio: 150, stock: 0, img: "assets/producto.jpg" },
-    { id: 7, nombre: "Producto G", precio: 100, stock: 40, img: "assets/producto.jpg" },
-    { id: 8, nombre: "Producto H", precio: 180, stock: 0, img: "assets/producto.jpg" },
-    { id: 9, nombre: "Producto I", precio: 210, stock: 0, img: "assets/producto.jpg" },
-    { id: 10, nombre: "Producto J", precio: 90, stock: 40, img: "assets/producto.jpg" },
+    { id: 1, nombre: "Mouse SteelSeries Aerox 3", precio: 300, stock: 0, img: "assets/SteelSeriesAerox3.jpg" },
+    { id: 2, nombre: "Mouse Razer Viper Ultimate", precio: 200, stock: 40, img: "assets/RazerViperUltimate.jpg" },
+    { id: 3, nombre: "Mouse Logitech G PRO X", precio: 330, stock: 40, img: "assets/Logitech_G_PRO_X.png" },
+    { id: 4, nombre: "Mouse Logitech G502 HERO", precio: 300, stock: 40, img: "assets/Logitech_G502_HERO.png" },
+    { id: 5, nombre: "Mouse HyperX Pulsefire Surge", precio: 200, stock: 40, img: "assets/HyperXPulsefireSurge.jpg" },
+    { id: 6, nombre: "Teclado Corsair K95 RGB", precio: 150, stock: 0, img: "assets/CorsairK95RGB_2.jpg" },
+    { id: 7, nombre: "Teclado SteelSeries Apex Pro", precio: 100, stock: 40, img: "assets/SteelSeriesApexPro.jpg" },
+    { id: 8, nombre: "Teclado Logitech G915 Wireless", precio: 180, stock: 0, img: "assets/LogitechG915Wireless_2.jpg" },
+    { id: 9, nombre: "Teclado Razer Huntsman Elite", precio: 210, stock: 0, img: "assets/RazerHuntsmanElite.jpg" },
+    { id: 10, nombre: "Teclado Logitech G Pro", precio: 90, stock: 40, img: "assets/LogitechG_Pro.jpg" },
+    { id: 11, nombre: "Auricular Razer Nari Ultimate", precio: 90, stock: 40, img: "assets/RazerNariUltimate.jpg" },
+    { id: 12, nombre: "Auricular Logitech G935", precio: 90, stock: 40, img: "assets/LogitechG935.jpg" },
+    { id: 13, nombre: "Auricular Audeze Mobius", precio: 90, stock: 40, img: "assets/AudezeMobius.jpg" },
+    { id: 14, nombre: "Auricular 1More Spearhead VRX", precio: 90, stock: 40, img: "assets/1MoreSpearhead_VRX.jpg" },
+    { id: 15, nombre: "Auricular SteelSeries Arctis Pro GameDAC", precio: 90, stock: 40, img: "assets/SteelSeriesArctisProGameDAC.jpg" },
+    { id: 16, nombre: "Camara Web Elgato Facecam", precio: 90, stock: 40, img: "assets/ElgatoFacecam.jpg" },
+    { id: 17, nombre: "Camara Web Streamcam de Logitech", precio: 90, stock: 40, img: "assets/StreamcamLogitech.jpg" },
+    { id: 18, nombre: "Camara Web AVerMedia PW310P ", precio: 90, stock: 40, img: "assets/AVerMediaPW310P.jpg" },
+    { id: 19, nombre: "Camara Web Logitech Brio", precio: 90, stock: 40, img: "assets/LogitechBrio.jpg" },
+    { id: 20, nombre: "Camara Web AVerMedia PW315", precio: 90, stock: 40, img: "assets/AVerMedia_PW315.jpg" },
+    { id: 21, nombre: "Silla Noblechairs Hero", precio: 90, stock: 40, img: "assets/NoblechairsHero.jpg" },
+    { id: 22, nombre: "Silla Razer Iskur", precio: 90, stock: 40, img: "assets/RazerIskur.jpg" },
+    { id: 23, nombre: "Silla Secretlab OMEGA", precio: 90, stock: 40, img: "assets/SecretlabOMEGA.jpg" },
+    { id: 24, nombre: "Silla MSI MAG CH120 X", precio: 90, stock: 40, img: "assets/MSI_MAG_CH120X.jpg" },
+    { id: 25, nombre: "Silla Corsair T3 Rush ", precio: 90, stock: 40, img: "assets/CorsairT3Rush.jpg" },
 ]
 
 
@@ -264,14 +279,14 @@ const generadorTablaFav = (favoritos) => {
         productosGeneradosFav += `
         <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center">
-                    <img src="${elemento.img}" alt="" class="imgCarrito">
-                    <div class="d-flex flex-column">
+                    <img src="${elemento.img}" alt="" class="imgCarrito me-2">
+                    <div class="d-flex flex-column me-3">
                         <h6>${elemento.nombre}</h6>
                         <h6>$ ${elemento.total}</h6>
                     </div>
                 </div>
-                <div>
-                    <i class="fas fa-shopping-cart fa-lg me-5" onclick="favCar(${elemento.id})"></i>
+                <div class="d-flex justify-content-end">
+                    <i class="fas fa-shopping-cart fa-lg me-2" onclick="favCar(${elemento.id})"></i>
                     <i class="fa-solid fa-trash-can fa-lg" onclick="eliminarProductoFav(${elemento.id})"></i>
                 </div>
         </div>`;
