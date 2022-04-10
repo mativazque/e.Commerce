@@ -16,3 +16,6 @@ body {
   background-color:black;
 }
 
+main {
+  min-height: 82vh;
+}

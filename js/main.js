@@ -17,9 +17,9 @@ class orderUser {
 
 
 const productos = [
-    { id: 1, nombre: "Mouse SteelSeries Aerox 3", precio: 300, stock: 0, img: "assets/SteelSeriesAerox3.jpg" },
-    { id: 2, nombre: "Mouse Razer Viper Ultimate", precio: 200, stock: 40, img: "assets/RazerViperUltimate.jpg" },
-    { id: 3, nombre: "Mouse Logitech G PRO X", precio: 330, stock: 40, img: "assets/Logitech_G_PRO_X.png" },
+    { id: 1, nombre: "Mouse SteelSeries Aerox 3", precio: 1000, stock: 0, img: "assets/SteelSeriesAerox3.jpg" },
+    { id: 2, nombre: "Mouse Razer Viper Ultimate", precio: 2000, stock: 40, img: "assets/RazerViperUltimate.jpg" },
+    { id: 3, nombre: "Mouse Logitech G PRO X", precio: 3300, stock: 40, img: "assets/Logitech_G_PRO_X.png" },
     { id: 4, nombre: "Mouse Logitech G502 HERO", precio: 300, stock: 40, img: "assets/Logitech_G502_HERO.png" },
     { id: 5, nombre: "Mouse HyperX Pulsefire Surge", precio: 200, stock: 40, img: "assets/HyperXPulsefireSurge.jpg" },
     { id: 6, nombre: "Teclado Corsair K95 RGB", precio: 150, stock: 0, img: "assets/CorsairK95RGB_2.jpg" },
@@ -56,7 +56,7 @@ const generadorProductos = (productos) => {
                 <div class="card-body p-2">
                     <div class="text-center">
                         <h6 class="fw-bolder">${elemento.nombre}</h6>
-                        <h3 class="fw-bolder mt-3">$ ${elemento.precio}</h3>
+                        <h4 class="fw-bolder mt-3">$ ${elemento.precio}</h4>
                     </div>
                 </div>
                 <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
@@ -82,13 +82,26 @@ const mostrarCardenHTML = (card) => {
 const valorProductoBusc = () => {
     const valorProductoBuscado = document.getElementById("buscador").value.toUpperCase().trim();
 
-    const productosBuscados = productos.filter((elemento) => elemento.nombre.toUpperCase().includes(valorProductoBuscado));
+    let productosBuscados = productos.filter((elemento) => elemento.nombre.toUpperCase().includes(valorProductoBuscado));
 
-    generadorProductos(productosBuscados);
+    console.log(productosBuscados.length);
+
+    if (productosBuscados.length == 0) {
+        productosBuscados = "No se encontró ningún producto";
+        document.getElementById("contenedorProductos").innerHTML = `<h6 style="color: #ffff;">${productosBuscados}</h6>`;
+    } else {
+        generadorProductos(productosBuscados);
+    }
+
+    document.getElementById("Header").innerHTML = "";
 }
 
 let botonBuscador = document.getElementById("botonDebuscador");
 botonBuscador.addEventListener("click", valorProductoBusc);
+
+let enterBuscador = document.getElementById("buscador");
+enterBuscador.addEventListener("keydown", valorProductoBusc);
+
 
 
 
