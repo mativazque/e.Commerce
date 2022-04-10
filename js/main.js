@@ -51,16 +51,15 @@ const generadorProductos = (productos) => {
     productos.forEach((elemento) => {
         productosGenerados += `
         <div class="col mb-5">
-            <div class="card h-100">
-                ${(elemento.stock == 0) ? `<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sin Stock</div>` : ``} 
+            <div class="card h-100"> 
                 <img class="card-img-top" src=${elemento.img} alt="..." />
-                <div class="card-body p-4">
+                <div class="card-body p-2">
                     <div class="text-center">
-                        <h5 class="fw-bolder">${elemento.nombre}</h5>
-                        ${elemento.precio}
+                        <h6 class="fw-bolder">${elemento.nombre}</h6>
+                        <h3 class="fw-bolder mt-3">$ ${elemento.precio}</h3>
                     </div>
                 </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
                         <button type="button" class="btn btn-outline-dark m-2" onclick="agregarAlCarrito(${elemento.id})"><i class="fas fa-shopping-cart fa-lg"></i></button>
                         <button type="button" class="btn btn-outline-dark m-2" onclick="agregarFavoritos(${elemento.id})"><i class="fa-solid fa-heart fa-lg"></i></button>
@@ -110,7 +109,7 @@ const generadorTablaCarrito = (carrito) => {
     let productosGeneradosCarrito = "";
     carrito.forEach((elemento) => {
         productosGeneradosCarrito += `
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <img src="${elemento.img}" alt="" class="imgCarrito">
                     <div class="d-flex flex-column">
@@ -124,7 +123,8 @@ const generadorTablaCarrito = (carrito) => {
                     </div>
                 </div>
                 <i class="fa-solid fa-trash-can fa-lg" onclick="eliminarProducto(${elemento.id})"></i>
-            </div>`;
+            </div>
+            <hr style="height: 0.5px">`;
     });
 
     mostrarTablaCarrito(productosGeneradosCarrito);
@@ -277,7 +277,7 @@ const generadorTablaFav = (favoritos) => {
     let productosGeneradosFav = "";
     favoritos.forEach((elemento) => {
         productosGeneradosFav += `
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <img src="${elemento.img}" alt="" class="imgCarrito me-2">
                     <div class="d-flex flex-column me-3">
@@ -286,10 +286,11 @@ const generadorTablaFav = (favoritos) => {
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <i class="fas fa-shopping-cart fa-lg me-2" onclick="favCar(${elemento.id})"></i>
+                    <i class="fas fa-shopping-cart fa-lg me-3" onclick="favCar(${elemento.id})"></i>
                     <i class="fa-solid fa-trash-can fa-lg" onclick="eliminarProductoFav(${elemento.id})"></i>
                 </div>
-        </div>`;
+        </div>
+        <hr style="height: 0.5px">`;
     });
 
     mostrarTablaFav(productosGeneradosFav);
