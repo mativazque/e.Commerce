@@ -22,7 +22,8 @@
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Roboto&family=Roboto+Condensed&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Roboto&family=Roboto+Condensed&display=swap"
         rel="stylesheet">
     <!-- JS-->
     <script src="js/main.js" defer></script>
@@ -38,20 +39,6 @@
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                        </ul>
-                    </li>
                     <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
                         id="buscador">
                     <button class="btn btn-secondary" type="submit" id="botonDebuscador">Search</button>
@@ -115,13 +102,45 @@
     </div>
 
     <!-- Header-->
-    <header id="Header" class="m-0 p-0">
-        <div class="bg-dark py-5" >
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Shop in style</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-                </div>
+    <header id="Header">
+        <div id="contenedorGrid" class="container-fluid m-0 p-0">
+            <div id="gridHeader">
+                
+                <div id="portada"></div>
+                
+                <button id="categoriaMouse" class="botonClase" onclick="filterCategoria(`mouse`)">
+                    <div class="contenedorTitCat">
+                        <h4 class="m-0 p-3">Mouses</h4>
+                    </div>
+                </button>
+                
+                        
+                <button id="categoriaAuri" class="botonClase" onclick="filterCategoria(`auricular`)">
+                    <div class="contenedorTitCat">
+                        <h4 class="m-0 p-3">Auriculares</h4>
+                    </div>
+                </button>
+                
+                <button id="categoriaSilla" class="botonClase" onclick="filterCategoria(`silla`)">
+                    <div class="contenedorTitCat">
+                        <h4 class="m-0 p-3">Silla</h4>
+                    </div>
+                </button>
+
+                <button id="categoriaCam" class="botonClase" onclick="filterCategoria(`camara`)">
+                    <div class="contenedorTitCat">
+                        <h4 class="m-0 p-3">Camaras</h4>
+                    </div>
+                </button>
+
+                <button id="categoriaTeclado" class="botonClase" onclick="filterCategoria(`teclado`)">
+                    <div class="contenedorTitCat">
+                        <h4 class="m-0 p-3">Teclados</h4>
+                    </div>
+                </button>
+                    
+                
+                
             </div>
         </div>
     </header>

@@ -19,3 +19,211 @@ body {
 main {
   min-height: 82vh;
 }
+
+#contenedorGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+
+}
+
+.contenedorTitCat {
+  background-color:rgba(0, 0, 0, 0.678);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+}
+
+.botonClase {
+  color: #ffff;
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 1199px) {
+  #gridHeader {
+    display: grid;
+    width: 90%;
+    height: 90%;
+    grid-template-rows: 3fr 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+          "A A"
+          "B C"
+          "D E"
+          "F F";
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  }
+  
+  #portada {
+    grid-area:A;
+    background-image: url(../assets/portada.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+  }
+  
+  #categoriaMouse {
+    grid-area:B;
+    background-image: url(../assets/categoriaTeclado.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+    width: 100%;
+    height: 100%;
+  }
+  
+  #categoriaAuri {
+    grid-area:C;
+    background-image: url(../assets/categoriaAuris.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+  
+  #categoriaSilla {
+    grid-area:D;
+    background-image: url(../assets/categoriaSilla.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+  
+  
+  #categoriaCam {
+    grid-area:E;
+    background-image: url(../assets/categoriaCamm.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+  
+  #categoriaTeclado {
+    grid-area:F;
+    background-image: url(../assets/categoriaTeclado.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+}
+
+@media only screen and (min-width: 1199px) {
+  #gridHeader {
+    display: grid;
+    width: 90%;
+    height: 90%;
+    grid-template-rows: 1fr 1fr 1fr; 
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-areas:
+          "A B C"
+          "A D E"
+          "A F F";
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  }
+  
+  #portada {
+    grid-area:A;
+    background-image: url(../assets/portada.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+  }
+  
+  #categoriaMouse {
+    grid-area:B;
+    background-image: url(../assets/categoriaTeclado.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+  
+  #categoriaAuri {
+    grid-area:C;
+    background-image: url(../assets/categoriaAuris.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+  
+  #categoriaSilla {
+    grid-area:D;
+    background-image: url(../assets/categoriaSilla.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+  
+  
+  #categoriaCam {
+    grid-area:E;
+    background-image: url(../assets/categoriaCamm.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+  
+  #categoriaTeclado {
+    grid-area:F;
+    background-image: url(../assets/categoriaTeclado.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+  }
+}
