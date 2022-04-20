@@ -22,59 +22,57 @@
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500&family=Roboto&family=Roboto+Condensed&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <!-- JS-->
     <script src="js/main.js" defer></script>
 </head>
 
 <body>
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand fw-bolder" href="index.html">Gamer Over</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <input class="form-control me-2" type="search" placeholder="Search products" aria-label="Search"
+                <ul class="navbar-nav me-auto mb-lg-0 ms-lg-4 pe-2 pb-2 pt-2" id="listaBuscador">
+                    <input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Search"
                         id="buscador">
                     <button class="btn btn-secondary" type="submit" id="botonDebuscador">Search</button>
                 </ul>
                 <form class="d-flex">
 
-                    <button class="btn btn-outline-dark p-2 me-3" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasRightFav" aria-controls="offcanvasRight">
-                        <i class="fa-solid fa-heart fa-lg"></i>
-                        <span class="badge bg-dark text-white ms-1 rounded-pill" id="spamFavoritos">0</span>
+                    <button class="btn btn-outline p-2 me-4" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRightFav" aria-controls="offcanvasRight" id="botonFav">
+                        <i class="fa-solid fa-heart fa-lg text-white"></i>
+                        <span class="badge text-white ms-1 rounded-pill" id="spamFavoritos">0</span>
                     </button>
 
-                    <button class="btn btn-outline-dark p-2" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                        <i class="fas fa-shopping-cart fa-lg"></i>
-                        <span class="badge bg-dark text-white ms-1 rounded-pill" id="spamCarrito">0</span>
+                    <button class="btn btn-outline p-2" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" id="botonCarro">
+                        <i class="fas fa-shopping-cart fa-lg text-white"></i>
+                        <span class="badge text-white ms-1 rounded-pill" id="spamCarrito">0</span>
                     </button>
                 </form>
             </div>
         </div>
     </nav>
     <!-- Carrito-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Carrito de compras</h5>
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header text-white">
+            <h5 clsss="" id="offcanvasRightLabel">Carrito de compras</h5>
             <hr class="mt-1">
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" id="productosDelCarrito">
         </div>
-        <div class="offcanvas-footer">
-            <div class="d-flex justify-content-between p-2">
-                <h5>Total a pagar</h5>
+        <div class="offcanvas-footer" id="footerCarrito">
+            <div class="d-flex justify-content-between p-3 pb-0 text-white">
+                <h5>Total</h5>
                 <h5 id="totalCompra"></h5>
             </div>
-            <div class="d-flex justify-content-between p-2">
+            <div class="d-flex justify-content-between p-3 pb-4">
                 <button type="button" class="btn btn-danger" onclick="vaciarCarrito()">Vaciar carrito</button>
                 <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas"
                     onclick="confirmarCompra()">Pagar</button>
@@ -82,22 +80,15 @@
         </div>
     </div>
     <!-- Favorito-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightFav" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRightFav" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header text-white">
             <h5 id="offcanvasRightLabel">Productos favoritos</h5>
             <hr class="mt-1">
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" id="productosFavoritos">
         </div>
-        <div class="offcanvas-footer">
-            <div class="d-flex justify-content-between p-2">
-                <button type="button" class="btn btn-danger" onclick="vaciarFavoritos()">Eliminar todos</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas"
-                    onclick="favoritosAlCarrito()">Enviar a
-                    <i class="fas fa-shopping-cart fa-lg"></i>
-                </button>
-            </div>
+        <div class="offcanvas-footer" id="footerFav">
         </div>
     </div>
 
@@ -106,36 +97,38 @@
         <div id="contenedorGrid" class="container-fluid m-0 p-0">
             <div id="gridHeader">
 
-                <div id="portada"></div>
+                <div class="d-flex justify-content-center align-items-end" id="portada">
+                    <h3 class="titlePortada text-white pb-1 sm-pb-3 md-pb-3 lg-pb-3">We love the gaming</h3>
+                </div>
 
                 <button id="categoriaMouse" class="botonClase" onclick="filterCategoria(`mouse`)">
                     <div class="contenedorTitCat">
-                        <h4 class="m-0 p-3">Mouses</h4>
+                        <h4 class="m-0 p-3 fw-bolder">Mouses</h4>
                     </div>
                 </button>
 
 
                 <button id="categoriaAuri" class="botonClase" onclick="filterCategoria(`auricular`)">
                     <div class="contenedorTitCat">
-                        <h4 class="m-0 p-3">Auriculares</h4>
+                        <h4 class="m-0 p-3 fw-bolder">Auriculares</h4>
                     </div>
                 </button>
 
                 <button id="categoriaSilla" class="botonClase" onclick="filterCategoria(`silla`)">
                     <div class="contenedorTitCat">
-                        <h4 class="m-0 p-3">Sillas</h4>
+                        <h4 class="m-0 p-3 fw-bolder">Sillas</h4>
                     </div>
                 </button>
 
                 <button id="categoriaCam" class="botonClase" onclick="filterCategoria(`camara`)">
                     <div class="contenedorTitCat">
-                        <h4 class="m-0 p-3">Camaras</h4>
+                        <h4 class="m-0 p-3 fw-bolder">Camaras</h4>
                     </div>
                 </button>
 
                 <button id="categoriaTeclado" class="botonClase" onclick="filterCategoria(`teclado`)">
                     <div class="contenedorTitCat">
-                        <h4 class="m-0 p-3">Teclados</h4>
+                        <h4 class="m-0 p-3 fw-bolder">Teclados</h4>
                     </div>
                 </button>
 
@@ -153,10 +146,19 @@
         </section>
     </main>
     <!-- Footer-->
-    <footer class="py-5 bg-dark">
+    <footer class="pt-5 bg-dark text-center">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
+            <h5 class="m-0 text-center text-white">Encontranos en las redes:</h5>
+            <div class="container text-center mt-3 mb-3">
+                <a href="https://www.facebook.com/" class="ancalaFooter">
+                    <i class="fa-brands fa-facebook-f text-white fa-2xl pe-2"></i>
+                </a>
+                <a href="https://www.instagram.com/" class="ancalaFooter">
+                    <i class="fa-brands fa-instagram text-white fa-2xl ps-2"></i>
+                </a>
+            </div>
         </div>
+        <p class="text-muted m-0 py-4">Sitio diseñado por Matías Vázquez</p>
     </footer>
     <!-- Bootstrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -174,3 +176,4 @@
 </body>
 
 </html>
+

@@ -3,6 +3,11 @@
   font-family: roboto;
 }
 
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
 
 .imgCarrito{
   height: 90px;
@@ -20,6 +25,47 @@ main {
   min-height: 82vh;
 }
 
+#listaBuscador {
+  display: inline-block;
+  width: 100%;
+}
+
+#buscador {
+  display: inline-block;
+  width: 180px;
+}
+
+#botonDebuscador {
+  display: inline-block;
+}
+
+#botonFav{
+  position: relative;
+}
+
+#botonCarro{
+  position: relative;
+}
+
+#spamFavoritos {
+  background-color:red;
+  position: absolute;
+  left:23px;
+}
+
+
+#spamCarrito {
+  background-color:red;
+  position: absolute;
+  left:26px;
+}
+
+.titlePortada {
+  font-size:roboto;
+  font-weight:900;
+}
+
+
 #contenedorGrid {
   display: flex;
   justify-content: center;
@@ -34,13 +80,29 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bolder;
+  font-weight: 900;
+  border-radius: 10px;
+
 }
 
 .botonClase {
   color: #ffff;
   height: 100%;
   width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffff;
+  border: none;
+  border-radius: 10px;
+}
+
+.botonClase:hover{
+  box-shadow: 1px 1px 20px -5px #ffff;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -71,67 +133,27 @@ main {
   #categoriaMouse {
     grid-area:B;
     background-image: url(../assets/categoriaTeclado.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   #categoriaAuri {
     grid-area:C;
     background-image: url(../assets/categoriaAuris.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   #categoriaSilla {
     grid-area:D;
     background-image: url(../assets/categoriaSilla.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   
   #categoriaCam {
     grid-area:E;
     background-image: url(../assets/categoriaCamm.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   #categoriaTeclado {
     grid-area:F;
     background-image: url(../assets/categoriaTeclado.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
 }
 
@@ -162,66 +184,59 @@ main {
   #categoriaMouse {
     grid-area:B;
     background-image: url(../assets/categoriaTeclado.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   #categoriaAuri {
     grid-area:C;
     background-image: url(../assets/categoriaAuris.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   #categoriaSilla {
     grid-area:D;
     background-image: url(../assets/categoriaSilla.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   
   #categoriaCam {
     grid-area:E;
     background-image: url(../assets/categoriaCamm.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
   
   #categoriaTeclado {
     grid-area:F;
     background-image: url(../assets/categoriaTeclado.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffff;
   }
 }
+
+.card {
+  border-color: rgb(35, 35, 235);
+  border-width: 2px;
+}
+
+.card:hover {
+  box-shadow: 1px 1px 35px  red;
+}
+
+.iconCart {
+  background: linear-gradient(to right, #df0024, #2e6db4);
+  border-radius:5px;
+}
+
+.iconCart:hover {
+  background: linear-gradient(to right, #d12743, #417abc);
+
+}
+
+.iconFav {
+  background: linear-gradient(to right, #df0024, #2e6db4);
+  border-radius:5px;
+}
+.iconFav:hover {
+  background: linear-gradient(to right, #d12743, #417abc);
+}
+
+.ancalaFooter {
+  list-style: none;
+  text-decoration: none;
+}
+

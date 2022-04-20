@@ -1,7 +1,15 @@
+let productos = [];
+
+fetch("https://e-commerce-745d1-default-rtdb.firebaseio.com/productos.json")
+.then((response) => response.json())
+.then((data) => productos = data)
+
+fetch("https://e-commerce-745d1-default-rtdb.firebaseio.com/productos.json")
+.then((response) => response.json())
+.then((data) => generadorProductos(data))
 
 let carrito = [];
 let favoritos = [];
-let productos = [];
 
 class orderUser {
     constructor(id, nombre, precio, img, cantidad) {
@@ -14,37 +22,24 @@ class orderUser {
     }
 }
 
-
-
-fetch("/data.json")
-.then((response) => response.json())
-.then((data) => generadorProductos(data.productos))
-
-fetch("/data.json")
-.then((response) => response.json())
-.then((data) => productos = (data.productos))
-
-
-
-
 //Generador de productos en INDEX
 const generadorProductos = (productos) => {
     let productosGenerados = "";
     productos.forEach((elemento) => {
         productosGenerados += `
         <div class="col mb-5">
-            <div class="card h-100"> 
+            <div class="card h-100 bg-dark"> 
                 <img class="card-img-top" src=${elemento.img} alt="..." />
-                <div class="card-body p-2">
-                    <div class="text-center">
+                <div class="card-body p-2 pt-4 bg-dark">
+                    <div class="text-center text-white">
                         <h6 class="fw-bolder">${elemento.nombre}</h6>
-                        <h4 class="fw-bolder mt-3">$ ${elemento.precio}</h4>
+                        <h4 class="fw-bolder mt-3">USD ${elemento.precio}</h4>
                     </div>
                 </div>
-                <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center">
-                        <button type="button" class="btn btn-outline-dark m-2" onclick="agregarAlCarrito(${elemento.id})"><i class="fas fa-shopping-cart fa-lg"></i></button>
-                        <button type="button" class="btn btn-outline-dark m-2" onclick="agregarFavoritos(${elemento.id})"><i class="fa-solid fa-heart fa-lg"></i></button>
+                <div class="card-footer p-2 pt-0 border-top-0 bg-dark">
+                    <div class="text-center text-white">
+                        <i class="fas fa-shopping-cart fa-lg p-3 m-1 iconCart" onclick="agregarAlCarrito(${elemento.id})"></i>
+                        <i class="fa-solid fa-heart fa-lg p-3 m-1 iconFav" onclick="agregarFavoritos(${elemento.id})"></i>
                     </div>
                 </div>
             </div>
@@ -65,8 +60,6 @@ const valorProductoBusc = () => {
     const valorProductoBuscado = document.getElementById("buscador").value.toUpperCase().trim();
 
     let productosBuscados = productos.filter((elemento) => elemento.nombre.toUpperCase().includes(valorProductoBuscado));
-
-    console.log(productosBuscados.length);
 
     if (productosBuscados.length == 0) {
         productosBuscados = "No se encontró ningún producto";
@@ -102,9 +95,19 @@ const filterCategoria = (categoria) => {
 //DOM carrito
 const mostrarTablaCarrito = (table) => {
     if (carrito.length == 0) {
-        document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`;
+        document.getElementById("productosDelCarrito").innerHTML = `<h6 class="text-white">No hay productos agregados.</h6>`;
+        document.getElementById("footerCarrito").innerHTML = ``;
     } else {
         document.getElementById("productosDelCarrito").innerHTML = table;
+        document.getElementById("footerCarrito").innerHTML = `
+        <div class="d-flex justify-content-between p-3 pb-0 text-white">
+            <h5>Total</h5>
+            <h5 id="totalCompra"></h5>
+        </div>
+        <div class="d-flex justify-content-between p-3 pb-4">
+            <button type="button" class="btn btn-danger" onclick="vaciarCarrito()">Vaciar carrito</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" onclick="confirmarCompra()">Pagar</button>
+        </div>`;
     }
 }
 
@@ -116,20 +119,20 @@ const generadorTablaCarrito = (carrito) => {
         productosGeneradosCarrito += `
         <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <img src="${elemento.img}" alt="" class="imgCarrito">
-                    <div class="d-flex flex-column">
+                    <img src="${elemento.img}" alt="" class="imgCarrito me-3">
+                    <div class="d-flex flex-column text-white">
                         <h6>${elemento.nombre}</h6>
-                        <h6>$ ${elemento.total}</h6>
+                        <h6 class="fw-bolder">USD ${elemento.total}</h6>
                         <div class="d-flex">
-                            <i class="fa-solid fa-circle-minus fa-lg me-2" onclick="restarProducto(${elemento.id})"></i>
+                            <i class="fa-solid fa-circle-minus fa-lg me-2 text-danger" onclick="restarProducto(${elemento.id})"></i>
                             <spam>${elemento.cantidad}</spam>
-                            <i class="fa-solid fa-circle-plus fa-lg ms-2" onclick="sumarProducto(${elemento.id})"></i>
+                            <i class="fa-solid fa-circle-plus fa-lg ms-2 text-success" onclick="sumarProducto(${elemento.id})"></i>
                         </div>
                     </div>
                 </div>
-                <i class="fa-solid fa-trash-can fa-lg" onclick="eliminarProducto(${elemento.id})"></i>
+                <i class="fa-solid fa-trash-can fa-lg text-white ms-2" onclick="eliminarProducto(${elemento.id})"></i>
             </div>
-            <hr style="height: 0.5px">`;
+            <hr class="text-white" style="height: 0.5px">`;
     });
 
     mostrarTablaCarrito(productosGeneradosCarrito);
@@ -137,8 +140,10 @@ const generadorTablaCarrito = (carrito) => {
 
 //Total carrito
 const totalCarrito = () => {
-    const totalCompra = carrito.reduce((acumulador, elemento) => acumulador + elemento.total, 0);
-    document.getElementById("totalCompra").innerHTML = `${totalCompra}`;
+    if (carrito.length > 0) {
+        const totalCompra = carrito.reduce((acumulador, elemento) => acumulador + elemento.total, 0);
+        document.getElementById("totalCompra").innerHTML = `USD ${totalCompra}`;
+    }
 }
 
 
@@ -210,8 +215,8 @@ const sumarProducto = (id) => {
     const indiceElemento = idCarrito.indexOf(id);
     carrito[indiceElemento].cantidad += 1
     carrito[indiceElemento].total = carrito[indiceElemento].cantidad * carrito[indiceElemento].precio
+    
     generadorTablaCarrito(carrito);
-
     totalCarrito();
     spamCarrito();
 
@@ -261,7 +266,6 @@ const confirmarCompra = () => {
 const vaciarCarrito = () => {
     carrito = [];
     generadorTablaCarrito(carrito);
-    totalCarrito();
     spamCarrito();
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
@@ -271,9 +275,17 @@ const vaciarCarrito = () => {
 //DOM favorito
 const mostrarTablaFav = (table) => {
     if (favoritos.length == 0) {
-        document.getElementById("productosFavoritos").innerHTML = `<h6>No hay productos agregados.</h6>`;
+        document.getElementById("productosFavoritos").innerHTML = `<h6 class="text-white">No hay productos agregados.</h6>`;
+        document.getElementById("footerFav").innerHTML = ``
     } else {
         document.getElementById("productosFavoritos").innerHTML = table;
+        document.getElementById("footerFav").innerHTML = `
+        <div class="d-flex justify-content-between p-4">
+            <button type="button" class="btn btn-danger" onclick="vaciarFavoritos()">Eliminar todos</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="offcanvas" onclick="favoritosAlCarrito()">Enviar a
+                <i class="fas fa-shopping-cart fa-lg"></i>
+            </button>
+        </div>`;
     }
 }
 
@@ -284,18 +296,18 @@ const generadorTablaFav = (favoritos) => {
         productosGeneradosFav += `
         <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                    <img src="${elemento.img}" alt="" class="imgCarrito me-2">
-                    <div class="d-flex flex-column me-3">
+                    <img src="${elemento.img}" alt="" class="imgCarrito me-3">
+                    <div class="d-flex flex-column me-3 text-white">
                         <h6>${elemento.nombre}</h6>
-                        <h6>$ ${elemento.total}</h6>
+                        <h6 class="fw-bolder">USD ${elemento.total}</h6>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <i class="fas fa-shopping-cart fa-lg me-3" onclick="favCar(${elemento.id})"></i>
-                    <i class="fa-solid fa-trash-can fa-lg" onclick="eliminarProductoFav(${elemento.id})"></i>
+                    <i class="fas fa-shopping-cart fa-lg me-3 text-success" onclick="favCar(${elemento.id})"></i>
+                    <i class="fa-solid fa-trash-can fa-lg text-danger" onclick="eliminarProductoFav(${elemento.id})"></i>
                 </div>
         </div>
-        <hr style="height: 0.5px">`;
+        <hr class="text-white" style="height: 0.5px">`;
     });
 
     mostrarTablaFav(productosGeneradosFav);
@@ -326,7 +338,7 @@ const agregarFavoritos = (id) => {
             position: "left", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                background: "linear-gradient(to right, #2eb433, #ff1919)",
             },
             onClick: function () { } // Callback after click
         }).showToast();
@@ -335,15 +347,14 @@ const agregarFavoritos = (id) => {
                 text: `Ya tienes ${productoFavorito.nombre} en favoritos`,
                 duration: 3000,
                 newWindow: true,
-                gravity: "top", // `top` or `bottom`
-                position: "left", // `left`, `center` or `right`
+                gravity: "bottom", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
-                    background: "linear-gradient(to right, #00b0b, #96c93d)",
+                    background: "linear-gradient(to right, #ea0e0e, #e43c3c)",
                 },
                 onClick: function () { } // Callback after click
             }).showToast();
-
     }
 
     //Actualizando el HTML del Spam de Cantidad de productos agregados
@@ -375,7 +386,7 @@ const favCar = (id) => {
 
 }
 
-//Vaciar carrito
+//Vaciar fav
 const vaciarFavoritos = () => {
     favoritos = [];
     generadorTablaFav(favoritos);
@@ -408,10 +419,3 @@ if (localStorage.getItem("favoritos") != null) {
     generadorTablaFav(favoritos);
     spamFav();
 }
-
-
-// Ejecutando funciones
-generadorProductos(productos);
-
-if (carrito.length == 0) { document.getElementById("productosDelCarrito").innerHTML = `<h6>No hay productos agregados.</h6>`; }
-
