@@ -80,7 +80,6 @@ enterBuscador.addEventListener("keydown", valorProductoBusc);
 
 ///Filtro de categorias
 
-//Buscador de productos
 const filterCategoria = (categoria) => {
 
     let categoriaSelect = productos.filter((elemento) => elemento.categoria.includes(categoria));

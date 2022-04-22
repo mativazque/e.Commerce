@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Shop Homepage - Start Bootstrap Template</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <title>Gamer Over</title>
+    <link href="assets/faviconGamer.png"/>
     <!-- Favicon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- Bootstrap icons-->
@@ -39,16 +39,14 @@
                 <ul class="navbar-nav me-auto mb-lg-0 ms-lg-4 pe-2 pb-2 pt-2" id="listaBuscador">
                     <input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Search"
                         id="buscador">
-                    <button class="btn btn-secondary" type="submit" id="botonDebuscador">Search</button>
+                    <button class="btn btn-secondary" type="submit" id="botonDebuscador">Buscar</button>
                 </ul>
                 <form class="d-flex">
-
                     <button class="btn btn-outline p-2 me-4" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasRightFav" aria-controls="offcanvasRight" id="botonFav">
                         <i class="fa-solid fa-heart fa-lg text-white"></i>
                         <span class="badge text-white ms-1 rounded-pill" id="spamFavoritos">0</span>
                     </button>
-
                     <button class="btn btn-outline p-2" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" id="botonCarro">
                         <i class="fas fa-shopping-cart fa-lg text-white"></i>
@@ -59,11 +57,13 @@
         </div>
     </nav>
     <!-- Carrito-->
-    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header text-white">
             <h5 clsss="" id="offcanvasRightLabel">Carrito de compras</h5>
             <hr class="mt-1">
-            <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" id="productosDelCarrito">
         </div>
@@ -80,58 +80,51 @@
         </div>
     </div>
     <!-- Favorito-->
-    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRightFav" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRightFav"
+        aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header text-white">
             <h5 id="offcanvasRightLabel">Productos favoritos</h5>
             <hr class="mt-1">
-            <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close text-reset bg-white" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
         </div>
         <div class="offcanvas-body" id="productosFavoritos">
         </div>
         <div class="offcanvas-footer" id="footerFav">
         </div>
     </div>
-
     <!-- Header-->
     <header id="Header">
         <div id="contenedorGrid" class="container-fluid m-0 p-0">
             <div id="gridHeader">
-
                 <div class="d-flex justify-content-center align-items-end" id="portada">
                     <h3 class="titlePortada text-white pb-1 sm-pb-3 md-pb-3 lg-pb-3">We love the gaming</h3>
                 </div>
-
                 <button id="categoriaMouse" class="botonClase" onclick="filterCategoria(`mouse`)">
                     <div class="contenedorTitCat">
                         <h4 class="m-0 p-3 fw-bolder">Mouses</h4>
                     </div>
                 </button>
-
-
                 <button id="categoriaAuri" class="botonClase" onclick="filterCategoria(`auricular`)">
                     <div class="contenedorTitCat">
                         <h4 class="m-0 p-3 fw-bolder">Auriculares</h4>
                     </div>
                 </button>
-
                 <button id="categoriaSilla" class="botonClase" onclick="filterCategoria(`silla`)">
                     <div class="contenedorTitCat">
                         <h4 class="m-0 p-3 fw-bolder">Sillas</h4>
                     </div>
                 </button>
-
                 <button id="categoriaCam" class="botonClase" onclick="filterCategoria(`camara`)">
                     <div class="contenedorTitCat">
                         <h4 class="m-0 p-3 fw-bolder">Camaras</h4>
                     </div>
                 </button>
-
                 <button id="categoriaTeclado" class="botonClase" onclick="filterCategoria(`teclado`)">
                     <div class="contenedorTitCat">
                         <h4 class="m-0 p-3 fw-bolder">Teclados</h4>
                     </div>
                 </button>
-
             </div>
         </div>
     </header>
@@ -164,16 +157,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
-
     <!-- Sweet Alert-->
     <script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <!-- Toastify-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
     <!-- Favicon core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
 </body>
 
 </html>
-
